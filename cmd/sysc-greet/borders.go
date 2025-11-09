@@ -127,8 +127,7 @@ func (m model) renderDualBorderLayout(termWidth, termHeight int) string {
 	// CHANGED 2025-10-08 - Also remove outer border for ticker
 	// Add matrix to backgrounds that remove outer border
 	// Add fireworks to backgrounds that remove outer border
-	// Add aquarium to backgrounds that remove outer border
-	if m.selectedBackground == "fire" || m.selectedBackground == "ascii-rain" || m.selectedBackground == "matrix" || m.selectedBackground == "ticker" || m.selectedBackground == "fire+rain" || m.selectedBackground == "fireworks" || m.selectedBackground == "aquarium" {
+	if m.selectedBackground == "fire" || m.selectedBackground == "ascii-rain" || m.selectedBackground == "matrix" || m.selectedBackground == "ticker" || m.selectedBackground == "fire+rain" || m.selectedBackground == "fireworks" {
 		helpText := m.renderMainHelp()
 		helpStyle := lipgloss.NewStyle().
 			Foreground(FgMuted).
@@ -291,7 +290,7 @@ func (m model) renderASCII1BorderLayout(termWidth, termHeight int) string {
 	// CHANGED 2025-10-05 - Display error message below password field
 	if m.errorMessage != "" {
 		errorStyle := lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#FF5555")). // Red color
+			Foreground(Danger).
 			Bold(true)
 		sections = append(sections, "")
 		sections = append(sections, errorStyle.Render("✗ "+m.errorMessage))
@@ -375,7 +374,7 @@ func (m model) getOuterBorderStyle() lipgloss.Border {
 	case "classic":
 		return lipgloss.DoubleBorder()
 	case "modern":
-		return lipgloss.HiddenBorder() // Hide outer border for clean modern look
+		return lipgloss.ThickBorder() // Use thick outer for modern double-border look
 	case "minimal":
 		return lipgloss.HiddenBorder() // Hide outer for clean minimal look
 	case "ascii":

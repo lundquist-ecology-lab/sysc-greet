@@ -129,41 +129,19 @@ func applyTheme(themeName string, testMode bool) {
 		FgSecondary = lipgloss.Color("#F5A9B8") // Pink text
 		FgMuted = lipgloss.Color("#5BCEFA")     // Light blue muted
 
-	case "rama":
-		// RAMA theme - Inspired by RAMA keyboard aesthetics
-		BgBase = lipgloss.Color("#2b2d42")      // Space cadet
-		BgElevated = BgBase                     // Keep consistent
-		BgSubtle = BgBase                       // Keep consistent
-		Primary = lipgloss.Color("#ef233c")     // Red Pantone
-		Secondary = lipgloss.Color("#d90429")   // Fire engine red
-		Accent = lipgloss.Color("#8d99ae")      // Cool gray
-		FgPrimary = lipgloss.Color("#edf2f4")   // Anti-flash white
-		FgSecondary = lipgloss.Color("#8d99ae") // Cool gray
-		FgMuted = lipgloss.Color("#8d99ae")     // Cool gray
-
-	case "eldritch":
-		// Eldritch theme
-		BgBase = lipgloss.Color("#212337")
-		BgElevated = BgBase
-		BgSubtle = BgBase
-		Primary = lipgloss.Color("#37f499")
-		Secondary = lipgloss.Color("#04d1f9")
-		Accent = lipgloss.Color("#a48cf2")
-		FgPrimary = lipgloss.Color("#ebfafa")
-		FgSecondary = lipgloss.Color("#ABB4DA")
-		FgMuted = lipgloss.Color("#7081d0")
-
-	case "dark":
-		// DARK theme - True black and true white minimalism
-		BgBase = lipgloss.Color("#000000")      // True black
-		BgElevated = BgBase                     // Keep pure black
-		BgSubtle = BgBase                       // Keep pure black
-		Primary = lipgloss.Color("#ffffff")     // True white
-		Secondary = lipgloss.Color("#ffffff")   // True white
-		Accent = lipgloss.Color("#808080")      // Mid gray accent
-		FgPrimary = lipgloss.Color("#ffffff")   // True white
-		FgSecondary = lipgloss.Color("#cccccc") // Light gray
-		FgMuted = lipgloss.Color("#666666")     // Dark gray
+	case "paradise":
+		// Paradise - Custom theme based on user's kitty config
+		BgBase = lipgloss.Color("#151515")      // Dark background from kitty
+		BgElevated = BgBase                     // Elevated surface
+		BgSubtle = BgBase                       // Subtle background
+		Primary = lipgloss.Color("#8C977D")     // Green (cursor color)
+		Secondary = lipgloss.Color("#8DA3B9")   // Blue
+		Accent = lipgloss.Color("#D9BC8C")      // Yellow
+		Warning = lipgloss.Color("#D9BC8C")     // Yellow (matches Accent for warnings)
+		Danger = lipgloss.Color("#B66467")      // Red from kitty config
+		FgPrimary = lipgloss.Color("#E8E3E3")   // Light foreground
+		FgSecondary = lipgloss.Color("#E8E3E3") // Light foreground
+		FgMuted = lipgloss.Color("#424242")     // Dark gray muted
 
 	default: // "default"
 		// Original Crush-inspired theme

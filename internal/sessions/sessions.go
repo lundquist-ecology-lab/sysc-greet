@@ -8,10 +8,11 @@ import (
 )
 
 type Session struct {
-	Name string
-	Exec string
-	Type string // "X11" or "Wayland"
-	Path string
+	Name     string
+	Exec     string   // Original Exec line from desktop file
+	ExecArgs []string // Parsed command and arguments
+	Type     string   // "X11" or "Wayland"
+	Path     string
 }
 
 func (s Session) FilterValue() string {
@@ -63,6 +64,58 @@ func LoadSessions() ([]Session, error) {
 	return sessions, nil
 }
 
+// parseExecCommand parses a desktop file Exec line into command and arguments
+// Handles shell quoting (single and double quotes) and escaping
+func parseExecCommand(execLine string) []string {
+	var args []string
+	var current strings.Builder
+	inSingleQuote := false
+	inDoubleQuote := false
+	escaped := false
+
+	for i, r := range execLine {
+		if escaped {
+			current.WriteRune(r)
+			escaped = false
+			continue
+		}
+
+		switch r {
+		case '\\':
+			// Backslash escapes next character
+			escaped = true
+		case '\'':
+			if !inDoubleQuote {
+				inSingleQuote = !inSingleQuote
+			} else {
+				current.WriteRune(r)
+			}
+		case '"':
+			if !inSingleQuote {
+				inDoubleQuote = !inDoubleQuote
+			} else {
+				current.WriteRune(r)
+			}
+		case ' ', '\t':
+			if inSingleQuote || inDoubleQuote {
+				current.WriteRune(r)
+			} else if current.Len() > 0 {
+				args = append(args, current.String())
+				current.Reset()
+			}
+		default:
+			current.WriteRune(r)
+		}
+
+		// Handle end of string
+		if i == len(execLine)-1 && current.Len() > 0 {
+			args = append(args, current.String())
+		}
+	}
+
+	return args
+}
+
 func parseDesktopFile(path string) (Session, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -88,10 +141,14 @@ func parseDesktopFile(path string) (Session, error) {
 		sessionType = "Wayland"
 	}
 
+	// Parse the Exec command into proper arguments
+	execArgs := parseExecCommand(exec)
+
 	return Session{
-		Name: name,
-		Exec: exec,
-		Type: sessionType,
-		Path: path,
+		Name:     name,
+		Exec:     exec,
+		ExecArgs: execArgs,
+		Type:     sessionType,
+		Path:     path,
 	}, nil
 }

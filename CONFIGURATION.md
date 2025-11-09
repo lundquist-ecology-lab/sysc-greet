@@ -153,7 +153,6 @@ These auto-match your selected theme using the naming convention `sysc-greet-{th
 - `sysc-greet-material.png`
 - `sysc-greet-solarized.png`
 - `sysc-greet-monochrome.png`
-- `sysc-greet-eldritch.png`
 - `sysc-greet-transishardjob.png`
 
 **Adding/replacing themed wallpapers:**
@@ -197,43 +196,6 @@ sudo chown greeter:greeter /var/lib/greeter/Pictures/wallpapers/cool-animation.m
 Press `F1` (Settings) → Backgrounds → Select your wallpaper or video
 
 Both static and video wallpapers will appear in the same menu.
-
----
-
-## Cursor Visibility
-
-Kitty auto-hides the cursor after 3 seconds of inactivity. To hide it permanently, add compositor options:
-
-### niri
-
-Edit `/etc/greetd/niri-greeter-config.kdl`:
-
-```kdl
-cursor {
-    hide-when-typing
-    hide-after-inactive-ms 1000
-}
-```
-
-### sway
-
-Edit `/etc/greetd/sway-greeter-config`:
-
-```bash
-seat * hide_cursor 1000
-```
-
-### hyprland
-
-Edit `/etc/greetd/hyprland-greeter-config.conf`:
-
-```ini
-cursor {
-    invisible = true
-}
-```
-
-Restart greetd after changes: `sudo systemctl restart greetd`
 
 ---
 
@@ -295,7 +257,7 @@ Restart greetd after changes: `sudo systemctl restart greetd`
 - **ASCII configs:** `/usr/share/sysc-greet/ascii_configs/`
 - **Fonts:** `/usr/share/sysc-greet/fonts/`
 - **Wallpapers:** `/usr/share/sysc-greet/wallpapers/`
-- **Cache:** `/var/cache/sysc-greet/` (stores theme, border, background, session, ASCII variant, and username if `--remember-username` is enabled)
+- **Cache:** `/var/cache/sysc-greet/`
 - **Greeter home:** `/var/lib/greeter/`
 
 ### Binary Location

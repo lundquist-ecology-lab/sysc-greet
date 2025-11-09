@@ -56,7 +56,7 @@ func (m model) renderMonochromeForm(width int) string {
 	// CHANGED 2025-10-05 - Display error message in monochrome style
 	if m.errorMessage != "" {
 		errorStyle := lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#FF5555")).
+			Foreground(Danger).
 			Bold(true)
 		sections = append(sections, "")
 		sections = append(sections, errorStyle.Render("✗ "+m.errorMessage))
@@ -100,34 +100,6 @@ func (m model) renderMainForm(width int) string {
 		)
 		parts = append(parts, usernameRow)
 
-		// Display error message and failed attempt counter on login screen
-		if m.errorMessage != "" {
-			errorStyle := lipgloss.NewStyle().
-				Foreground(lipgloss.Color("#FF5555")).
-				Bold(true)
-			parts = append(parts, "")
-			parts = append(parts, errorStyle.Render("✗ "+m.errorMessage))
-		}
-
-		// Display failed attempt counter on login screen
-		if m.failedAttempts > 0 {
-			attemptStyle := lipgloss.NewStyle().
-				Foreground(lipgloss.Color("#FFAA00")).
-				Bold(true)
-
-			if m.failedAttempts >= 3 {
-				// Warning style for 3+ attempts
-				warningStyle := lipgloss.NewStyle().
-					Foreground(lipgloss.Color("#FF5555")).
-					Bold(true)
-				parts = append(parts, "")
-				parts = append(parts, warningStyle.Render("⚠ WARNING: Multiple failed attempts may lock your account"))
-			}
-
-			parts = append(parts, "")
-			parts = append(parts, attemptStyle.Render(fmt.Sprintf("Failed attempts: %d", m.failedAttempts)))
-		}
-
 	case ModePassword:
 		passwordLabel := lipgloss.NewStyle().
 			Bold(true).
@@ -154,7 +126,7 @@ func (m model) renderMainForm(width int) string {
 		// CAPS LOCK warning
 		if m.capsLockOn && m.focusState == FocusPassword {
 			capsLockStyle := lipgloss.NewStyle().
-				Foreground(lipgloss.Color("#FF5555")).
+				Foreground(Warning).
 				Bold(true).
 				Align(lipgloss.Center).
 				Width(width)
@@ -165,29 +137,10 @@ func (m model) renderMainForm(width int) string {
 		// CHANGED 2025-10-05 - Display error message below password in main form
 		if m.errorMessage != "" {
 			errorStyle := lipgloss.NewStyle().
-				Foreground(lipgloss.Color("#FF5555")).
+				Foreground(Danger).
 				Bold(true)
 			parts = append(parts, "")
 			parts = append(parts, errorStyle.Render("✗ "+m.errorMessage))
-		}
-
-		// Display failed attempt counter
-		if m.failedAttempts > 0 {
-			attemptStyle := lipgloss.NewStyle().
-				Foreground(lipgloss.Color("#FFAA00")).
-				Bold(true)
-
-			if m.failedAttempts >= 3 {
-				// Warning style for 3+ attempts
-				warningStyle := lipgloss.NewStyle().
-					Foreground(lipgloss.Color("#FF5555")).
-					Bold(true)
-				parts = append(parts, "")
-				parts = append(parts, warningStyle.Render("⚠ WARNING: Multiple failed attempts may lock your account"))
-			}
-
-			parts = append(parts, "")
-			parts = append(parts, attemptStyle.Render(fmt.Sprintf("Failed attempts: %d", m.failedAttempts)))
 		}
 
 	case ModeLoading:

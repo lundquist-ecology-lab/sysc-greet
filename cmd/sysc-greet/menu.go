@@ -19,9 +19,7 @@ func (m model) navigateToThemesSubmenu() (tea.Model, tea.Cmd) {
 		"Theme: Solarized",
 		"Theme: Monochrome",
 		"Theme: TransIsHardJob",
-		"Theme: Eldritch",
-		"Theme: RAMA",
-		"Theme: DARK",
+		"Theme: Paradise",
 		"Theme: Default",
 	}
 
@@ -58,7 +56,6 @@ func (m model) navigateToBackgroundsSubmenu() (tea.Model, tea.Cmd) {
 	rainEnabled := m.selectedBackground == "ascii-rain"
 	matrixEnabled := m.selectedBackground == "matrix"
 	fireworksEnabled := m.selectedBackground == "fireworks"
-	aquariumEnabled := m.selectedBackground == "aquarium"
 
 	m.menuOptions = []string{
 		"← Back",
@@ -66,7 +63,6 @@ func (m model) navigateToBackgroundsSubmenu() (tea.Model, tea.Cmd) {
 		formatCheckbox("ASCII Rain", rainEnabled),
 		formatCheckbox("Matrix", matrixEnabled),
 		formatCheckbox("Fireworks", fireworksEnabled),
-		formatCheckbox("Aquarium", aquariumEnabled),
 	}
 	m.mode = ModeBackgroundsSubmenu
 	m.menuIndex = 0
@@ -88,15 +84,11 @@ func (m model) navigateToASCIIEffectsSubmenu() (tea.Model, tea.Cmd) {
 	// Check which effects are enabled
 	typewriterEnabled := m.selectedBackground == "ticker"
 	printEnabled := m.selectedBackground == "print"
-	beamsEnabled := m.selectedBackground == "beams"
-	pourEnabled := m.selectedBackground == "pour"
-
+	
 	m.menuOptions = []string{
 		"← Back",
 		formatCheckbox("Typewriter", typewriterEnabled),
 		formatCheckbox("Print", printEnabled),
-		formatCheckbox("Beams", beamsEnabled),
-		formatCheckbox("Pour", pourEnabled),
 	}
 	m.mode = ModeASCIIEffectsSubmenu
 	m.menuIndex = 0

@@ -6,13 +6,13 @@ A graphical console greeter for [greetd](https://git.sr.ht/~kennylevinsen/greetd
 
 ## Features
 
-- **Mucho themes**: Dracula, Gruvbox, Material, Nord, Tokyo Night, Catppuccin, Solarized, Monochrome, RAMA, DARK, TrainsIsHardJob, [Eldritch](https://github.com/eldritch-theme/eldritch).
-- **Background Effects**: Fire (DOOM PSX), Matrix rain, ASCII rain, Fireworks, Aquarium
+- **Mucho themes**: Dracula, Gruvbox, Material, Nord, Tokyo Night, Catppuccin, Solarized, Monochrome, TransIsHardJob
+- **Background Effects**: Fire (DOOM PSX), Matrix rain, ASCII rain, Fireworks, Static patterns
 - **ASCII Effects**: Typewriter and Print effects for session text
 - **Border Styles**: Classic, Modern, Minimal (best), ASCII-1, ASCII-2, Wave, Pulse
 - **Screensaver**: Configurable idle timeout with ASCII art cycling
 - **Video Wallpapers**: Multi-monitor support via gslapper
-- **Security Features**: Failed attempt counter with account lockout warnings, optional username caching
+- **Preference Caching**: Theme, background, border, session persistence
 
 ## Installation
 
@@ -207,7 +207,6 @@ kitty --start-as=fullscreen sysc-greet --test
 sysc-greet --theme dracula          # Start with specific theme
 sysc-greet --border ascii-2         # Start with specific border
 sysc-greet --screensaver            # Enable screensaver in test mode
-sysc-greet --remember-username      # Cache username across sessions
 ```
 
 ## Acknowledgements
